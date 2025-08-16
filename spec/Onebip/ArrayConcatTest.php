@@ -2,7 +2,7 @@
 
 namespace Onebip;
 
-class ArrayConcatTest extends \PHPUnit_Framework_TestCase
+class ArrayConcatTest extends \PHPUnit\Framework\TestCase
 {
     public function testConcat()
     {

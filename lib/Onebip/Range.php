@@ -18,9 +18,14 @@ class Range implements Iterator
         $this->rewind();
     }
 
-    function rewind() { $this->curr = $this->from; }
-    function current() { return $this->curr; }
-    function key() { return $this->curr; }
-    function next() { $this->curr++; }
-    function valid() { return $this->curr < $this->to; }
+    function rewind(): void
+    { $this->curr = $this->from; }
+    function current(): mixed
+    { return $this->curr; }
+    function key(): mixed
+    { return $this->curr; }
+    function next(): void
+    { $this->curr++; }
+    function valid(): bool
+    { return $this->curr < $this->to; }
 }

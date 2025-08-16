@@ -4,7 +4,7 @@ namespace Onebip;
 
 use function Onebip\array_reduce;
 
-class ArrayReduceTest extends \PHPUnit_Framework_TestCase
+class ArrayReduceTest extends \PHPUnit\Framework\TestCase
 {
     public function testArrayReduce()
     {

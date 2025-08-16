@@ -2,7 +2,10 @@
 
 namespace Onebip;
 
-class ArrayAllTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\Attributes\CoversFunction;
+use PHPUnit\Framework\TestCase;
+
+class ArrayAllTest extends TestCase
 {
     public function testArrayAll()
     {

@@ -2,7 +2,7 @@
 
 namespace Onebip;
 
-class ArrayFlattenTest extends \PHPUnit_Framework_TestCase
+class ArrayFlattenTest extends \PHPUnit\Framework\TestCase
 {
     public function testArrayFlatten()
     {

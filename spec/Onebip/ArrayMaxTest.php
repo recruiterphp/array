@@ -4,7 +4,7 @@ namespace Onebip;
 
 use ArrayIterator;
 
-class ArrayMaxTest extends \PHPUnit_Framework_TestCase
+class ArrayMaxTest extends \PHPUnit\Framework\TestCase
 {
     public function testArrayMax()
     {

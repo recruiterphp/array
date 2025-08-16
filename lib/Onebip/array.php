@@ -28,7 +28,7 @@ function array_reduce($array, callable $f, $acc)
  *        array_concat(1, [2, 3], [4])
  *    );
  */
-function array_concat(/* $element, ... */)
+function array_concat(/* $element, ... */): array
 {
     $concatenated = [];
     $arguments = func_get_args();
@@ -70,7 +70,7 @@ function array_concat(/* $element, ... */)
  *        array_merge(['a' => 1], ['a' => 2]))
  *    );
  */
-function array_merge(/* $array, ... */)
+function array_merge(/* $array, ... */): array
 {
     $merged = [];
     $arrays = array_reverse(func_get_args());
@@ -105,7 +105,7 @@ function array_merge(/* $array, ... */)
  *        array_map([1, 2, 3], function($value) { return $value * 2; })
  *    );
  */
-function array_map($array, callable $mapper = null, $preserveKeys = false)
+function array_map($array, ?callable $mapper = null, $preserveKeys = false): array
 {
     $mapped = [];
     $mapper = $mapper ?: function($value) { return $value; };
@@ -284,7 +284,7 @@ function array_cartesian_product(array $arrays)
  *            )
  *        );
  */
-function array_group_by($array, callable $f = null)
+function array_group_by($array, ?callable $f = null)
 {
     $f = $f ?: function($value) { return $value; };
     return array_reduce(
@@ -355,7 +355,7 @@ function array_as_hierarchy(array $array, $separator = '.')
  *       $this->assertFalse(is_numeric_array(['field-1' => 1, 'field-2' => 2]));
  *       $this->assertFalse(is_numeric_array([1, 2, 'field' => 3]));
  */
-function is_numeric_array(array $array)
+function is_numeric_array(array $array): bool
 {
     foreach ($array as $key => $_) {
         if (!is_integer($key)) {
@@ -471,16 +471,4 @@ function array_subset(array $array1, array $array2)
         array_all($array1, function ($elem) use ($array2) {
             return in_array($elem, $array2);
         });
-}
-
-/**
- * Returns a the element for which predicate returns true.
- */
-function array_find($array, callable $pred)
-{
-    foreach ($array as $elem) {
-        if (call_user_func($pred, $elem, $array)) {
-            return $elem;
-        }
-    }
 }
