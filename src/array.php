@@ -197,15 +197,13 @@ function array_flatten($array)
  *         })
  *     )
  */
-function array_all($array, callable $predicate): bool
+function array_all(iterable $array, callable $predicate): bool
 {
-    foreach ($array as $key => $value) {
-        if (!call_user_func($predicate, $value, $key, $array)) {
-            return false;
-        }
+    if ($array instanceof \Traversable) {
+        $array = iterator_to_array($array);
     }
 
-    return true;
+    return \array_all($array, $predicate);
 }
 
 /*
