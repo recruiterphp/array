@@ -460,7 +460,7 @@ function array_max($array)
  * where $path is an array of keys. Returns null if the key
  * is not present, or the $default value if supplied.
  */
-function array_get_in($array, array $path, $default = null)
+function array_get_in(mixed $array, array $path, mixed $default = null): mixed
 {
     if ([] === $path) {
         return $array;
