@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Recruiter\Array;
 
-/*
+/**
  * Variant of PHP's array_reduce, but it supports any traversable in input
  * (arrays or objects instance Traversable) and is sensible to associative
  * arrays, other than normal arrays.
