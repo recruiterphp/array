@@ -1,5 +1,6 @@
 {
     "name": "recruiterphp/array",
+    "description": "Providers the array_* functions that you wish were part of PHP",
     "license": "MIT",
     "authors": [
         {
