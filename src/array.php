@@ -18,9 +18,9 @@ function array_reduce($array, callable $f, $acc)
     return $acc;
 }
 
-/*
- * Concatenates every parameters in an array. Parameters could be scalar values
- * or arrays. Doesn't preserve keys.
+/**
+ * Concatenates every parameter in an array. Parameters could be scalar values
+ * or iterable. Doesn't preserve keys.
  *
  * Examples:
  *    $this->assertSame(
@@ -28,12 +28,11 @@ function array_reduce($array, callable $f, $acc)
  *        array_concat(1, [2, 3], [4])
  *    );
  */
-function array_concat(/* $element, ... */): array
+function array_concat(mixed ...$arguments): array
 {
     $concatenated = [];
-    $arguments = func_get_args();
     foreach ($arguments as $argument) {
-        if (is_array($argument)) {
+        if (is_iterable($argument)) {
             foreach ($argument as $element) {
                 $concatenated[] = $element;
             }

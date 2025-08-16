@@ -16,6 +16,14 @@ class ArrayConcatTest extends TestCase
         );
     }
 
+    public function testContactWithIterator(): void
+    {
+        $this->assertSame(
+            [1, 2, 3, 4],
+            array_concat(1, new \ArrayIterator([2, 3]), [4]),
+        );
+    }
+
     public function testConcatPreservesNestedArrays(): void
     {
         $this->assertSame(
