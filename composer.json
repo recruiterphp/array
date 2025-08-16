@@ -25,11 +25,19 @@
         "onebip/onebip-array": "self.version"
     },
     "autoload": {
-        "psr-0": {
-            "Onebip": "lib/"
+        "psr-4": {
+            "Onebip\\": "src/"
         },
         "files": [
-            "lib/Onebip/array.php"
+            "src/array.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Onebip\\": "tests/"
+        },
+        "files": [
+            "src/array.php"
         ]
     },
     "config": {
