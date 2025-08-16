@@ -6,9 +6,9 @@ namespace Onebip;
 
 class Range implements \Iterator
 {
-    private $curr;
+    private int $curr = 0;
 
-    public function __construct(private $from, private $to)
+    public function __construct(private readonly int $from, private readonly int $to)
     {
         $this->rewind();
     }
@@ -18,12 +18,12 @@ class Range implements \Iterator
         $this->curr = $this->from;
     }
 
-    public function current(): mixed
+    public function current(): int
     {
         return $this->curr;
     }
 
-    public function key(): mixed
+    public function key(): int
     {
         return $this->curr;
     }
