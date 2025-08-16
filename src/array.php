@@ -217,8 +217,12 @@ function array_all(iterable $array, callable $predicate): bool
  *          })
  *      );
  */
-function array_some($array, callable $predicate): bool
+function array_some(iterable $array, callable $predicate): bool
 {
+    if (is_array($array)) {
+        return array_any($array, $predicate);
+    }
+
     foreach ($array as $key => $value) {
         if (call_user_func($predicate, $value, $key, $array)) {
             return true;
