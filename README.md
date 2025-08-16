@@ -28,7 +28,7 @@ composer require recruiterphp/array
 Enhanced version of PHP's `array_reduce` that supports any traversable and preserves keys.
 
 ```php
-use function Onebip\array_reduce;
+use function Recruiter\Array\array_reduce;
 
 $sum = array_reduce([1, 2, 3], fn($acc, $val) => $acc + $val, 0); // 6
 ```
@@ -37,7 +37,7 @@ $sum = array_reduce([1, 2, 3], fn($acc, $val) => $acc + $val, 0); // 6
 Maps over arrays with optional key preservation and index access.
 
 ```php
-use function Onebip\array_map;
+use function Recruiter\Array\array_map;
 
 $doubled = array_map([1, 2, 3], fn($n) => $n * 2); // [2, 4, 6]
 
@@ -50,7 +50,7 @@ $result = array_map(['a' => 1, 'b' => 2], fn($v) => $v * 2, true);
 Concatenates arrays and scalar values into a single array.
 
 ```php
-use function Onebip\array_concat;
+use function Recruiter\Array\array_concat;
 
 $result = array_concat(1, [2, 3], [4, 5]); // [1, 2, 3, 4, 5]
 ```
@@ -59,7 +59,7 @@ $result = array_concat(1, [2, 3], [4, 5]); // [1, 2, 3, 4, 5]
 Recursively merges arrays. Unlike PHP's `array_merge_recursive`, this keeps the second value when merging non-array values.
 
 ```php
-use function Onebip\array_merge;
+use function Recruiter\Array\array_merge;
 
 $merged = array_merge(
     ['a' => ['x' => 1]],
@@ -74,7 +74,7 @@ $merged = array_merge(
 Returns true if all elements satisfy the predicate.
 
 ```php
-use function Onebip\array_all;
+use function Recruiter\Array\array_all;
 
 $allEven = array_all([2, 4, 6], fn($n) => $n % 2 === 0); // true
 ```
@@ -83,7 +83,7 @@ $allEven = array_all([2, 4, 6], fn($n) => $n % 2 === 0); // true
 Returns true if at least one element satisfies the predicate.
 
 ```php
-use function Onebip\array_some;
+use function Recruiter\Array\array_some;
 
 $hasEven = array_some([1, 2, 3], fn($n) => $n % 2 === 0); // true
 ```
@@ -94,7 +94,7 @@ $hasEven = array_some([1, 2, 3], fn($n) => $n % 2 === 0); // true
 Recursively flattens nested arrays.
 
 ```php
-use function Onebip\array_flatten;
+use function Recruiter\Array\array_flatten;
 
 $flat = array_flatten([1, [2, [3, [4, 5]]]]); // [1, 2, 3, 4, 5]
 ```
@@ -103,7 +103,7 @@ $flat = array_flatten([1, [2, [3, [4, 5]]]]); // [1, 2, 3, 4, 5]
 Extracts a column from an array of arrays.
 
 ```php
-use function Onebip\array_pluck;
+use function Recruiter\Array\array_pluck;
 
 $names = array_pluck([
     ['name' => 'Alice', 'age' => 30],
@@ -116,7 +116,7 @@ $names = array_pluck([
 Groups array elements by the result of a function.
 
 ```php
-use function Onebip\array_group_by;
+use function Recruiter\Array\array_group_by;
 
 $grouped = array_group_by([1, 2, 3, 4, 5, 6], fn($n) => $n % 2);
 // [1 => [1, 3, 5], 0 => [2, 4, 6]]
@@ -126,7 +126,7 @@ $grouped = array_group_by([1, 2, 3, 4, 5, 6], fn($n) => $n % 2);
 Returns the Cartesian product of multiple arrays.
 
 ```php
-use function Onebip\array_cartesian_product;
+use function Recruiter\Array\array_cartesian_product;
 
 $product = array_cartesian_product([[1, 2], ['a', 'b']]);
 // [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
@@ -138,7 +138,7 @@ $product = array_cartesian_product([[1, 2], ['a', 'b']]);
 Safe array access with optional fallback.
 
 ```php
-use function Onebip\array_fetch;
+use function Recruiter\Array\array_fetch;
 
 $value = array_fetch(['foo' => 'bar'], 'foo'); // 'bar'
 $value = array_fetch([], 'missing', 'default'); // 'default'
@@ -149,7 +149,7 @@ $value = array_fetch([], 'key', fn($k) => "no $k"); // 'no key'
 Access nested array values using a path of keys.
 
 ```php
-use function Onebip\array_get_in;
+use function Recruiter\Array\array_get_in;
 
 $data = ['user' => ['name' => ['first' => 'John']]];
 $firstName = array_get_in($data, ['user', 'name', 'first']); // 'John'
@@ -160,7 +160,7 @@ $missing = array_get_in($data, ['user', 'age'], 0); // 0
 Updates an array element if it exists and is not null.
 
 ```php
-use function Onebip\array_update;
+use function Recruiter\Array\array_update;
 
 $updated = array_update(['count' => 5], 'count', fn($n) => $n + 1);
 // ['count' => 6]
@@ -172,7 +172,7 @@ $updated = array_update(['count' => 5], 'count', fn($n) => $n + 1);
 Transforms a flat array with dot-notation keys into a nested structure.
 
 ```php
-use function Onebip\array_as_hierarchy;
+use function Recruiter\Array\array_as_hierarchy;
 
 $hierarchy = array_as_hierarchy([
     'user.name' => 'John',
@@ -189,7 +189,7 @@ $hierarchy = array_as_hierarchy([
 Returns the maximum value in an array, or null if empty.
 
 ```php
-use function Onebip\array_max;
+use function Recruiter\Array\array_max;
 
 $max = array_max([3, 1, 4, 1, 5]); // 5
 ```
@@ -198,7 +198,7 @@ $max = array_max([3, 1, 4, 1, 5]); // 5
 Checks if array1 is a subset of array2.
 
 ```php
-use function Onebip\array_subset;
+use function Recruiter\Array\array_subset;
 
 $isSubset = array_subset([1, 2], [1, 2, 3]); // true
 ```
@@ -207,7 +207,7 @@ $isSubset = array_subset([1, 2], [1, 2, 3]); // true
 Checks if an array has only numeric keys.
 
 ```php
-use function Onebip\is_numeric_array;
+use function Recruiter\Array\is_numeric_array;
 
 $numeric = is_numeric_array([1, 2, 3]); // true
 $assoc = is_numeric_array(['a' => 1, 'b' => 2]); // false
@@ -218,7 +218,7 @@ $assoc = is_numeric_array(['a' => 1, 'b' => 2]); // false
 The package includes a `Range` class for creating numeric ranges:
 
 ```php
-use Onebip\Range;
+use Recruiter\Array\Range;
 
 $range = new Range(1, 5); // Iterates from 1 to 4
 foreach ($range as $n) {

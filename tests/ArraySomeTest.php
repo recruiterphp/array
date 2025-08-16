@@ -2,9 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Onebip;
+namespace Recruiter\Array\Tests;
 
 use PHPUnit\Framework\TestCase;
+
+use function Recruiter\Array\array_some;
+
+use Recruiter\Array\Range;
 
 class ArraySomeTest extends TestCase
 {

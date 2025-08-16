@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Onebip;
+namespace Recruiter\Array;
 
 /*
  * Variant of PHP's array_reduce, but it supports any traversable in input

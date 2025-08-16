@@ -27,19 +27,17 @@
     },
     "autoload": {
         "psr-4": {
-            "Onebip\\": "src/"
+            "Recruiter\\Array\\": "src/"
         },
         "files": [
-            "src/array.php"
+            "src/array.php",
+            "src/aliases.php"
         ]
     },
     "autoload-dev": {
         "psr-4": {
-            "Onebip\\": "tests/"
-        },
-        "files": [
-            "src/array.php"
-        ]
+            "Recruiter\\Array\\Tests\\": "tests/"
+        }
     },
     "config": {
         "allow-plugins": {

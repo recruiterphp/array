@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Onebip;
+namespace Recruiter\Array\Tests;
 
 use PHPUnit\Framework\TestCase;
+
+use function Recruiter\Array\array_group_by;
 
 class ArrayGroupByTest extends TestCase
 {

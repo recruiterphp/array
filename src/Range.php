@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Onebip;
+namespace Recruiter\Array;
 
 class Range implements \Iterator
 {
