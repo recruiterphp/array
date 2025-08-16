@@ -468,6 +468,10 @@ function array_get_in(mixed $array, array $path, mixed $default = null): mixed
 
     $head = array_shift($path);
 
+    if ($array instanceof \Traversable) {
+        $array = iterator_to_array($array);
+    }
+
     if (!is_array($array) || !array_key_exists($head, $array)) {
         return $default;
     }

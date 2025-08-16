@@ -56,4 +56,15 @@ class ArrayGetInTest extends TestCase
                 ['a' => ['b' => '']], ['a', 'b', 'c'], 0),
         );
     }
+
+    public function testIterator(): void
+    {
+        $iterator = new \ArrayIterator([
+            'a' => 42,
+            'b' => new \ArrayIterator(['c' => 43]),
+        ]);
+
+        $this->assertSame(42, array_get_in($iterator, ['a']));
+        $this->assertSame(43, array_get_in($iterator, ['b', 'c']));
+    }
 }
