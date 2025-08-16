@@ -8,7 +8,7 @@
         },
         {
             "name": "Contributors",
-            "homepage": "https://github.com/recruiterphp/onebip-array/graphs/contributors"
+            "homepage": "https://github.com/recruiterphp/array/graphs/contributors"
         }
     ],
     "require": {
