@@ -342,7 +342,7 @@ function array_group_by($array, ?callable $f = null)
  * Beware: this method uses references, only modify it
  * if you know what you're doing.
  */
-function array_as_hierarchy(array $array, $separator = '.'): array
+function array_as_hierarchy(iterable $array, $separator = '.'): array
 {
     $hierarchy = [];
     foreach ($array as $key => $value) {
@@ -370,15 +370,13 @@ function array_as_hierarchy(array $array, $separator = '.'): array
  *       $this->assertFalse(is_numeric_array(['field-1' => 1, 'field-2' => 2]));
  *       $this->assertFalse(is_numeric_array([1, 2, 'field' => 3]));
  */
-function is_numeric_array(array $array): bool
+function is_numeric_array(iterable $array): bool
 {
-    foreach (array_keys($array) as $key) {
-        if (!is_int($key)) {
-            return false;
-        }
+    if ($array instanceof \Traversable) {
+        $array = iterator_to_array($array);
     }
 
-    return true;
+    return array_all(array_keys($array), fn ($key) => is_int($key));
 }
 
 /**
