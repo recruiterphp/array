@@ -1,61 +1,63 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Onebip;
 
 use PHPUnit\Framework\TestCase;
 
 class ArrayMergeTest extends TestCase
 {
-    public function testMerge()
+    public function testMerge(): void
     {
         $this->assertSame(
             ['a' => [1, 2, 3, 4]],
-            array_merge(['a' => [1, 2]], ['a' => [3, 4]])
+            array_merge(['a' => [1, 2]], ['a' => [3, 4]]),
         );
     }
 
-    public function testMergeEmpty()
+    public function testMergeEmpty(): void
     {
         $this->assertSame([], array_merge([], []));
     }
 
-    public function testMergeNumericWillConcatInOrder()
+    public function testMergeNumericWillConcatInOrder(): void
     {
         $this->assertSame(
             [1, 2, 3, 4],
-            array_merge([1, 2], [3, 4])
+            array_merge([1, 2], [3, 4]),
         );
     }
 
-    public function testMergeAssociativeWillOverride()
+    public function testMergeAssociativeWillOverride(): void
     {
         $this->assertSame(
             ['a' => 2],
-            array_merge(['a' => 1], ['a' => 2])
+            array_merge(['a' => 1], ['a' => 2]),
         );
     }
 
-    public function testMergeDeplyRecursive()
+    public function testMergeDeplyRecursive(): void
     {
         $this->assertSame(
             ['a' => ['b' => null, 'c' => [1, 2, 3, 4]], 'b' => []],
-            array_merge(['a' => ['b' => 2, 'c' => [1, 2]]], ['a' => ['b' => null, 'c' => [3, 4]], 'b' => []])
+            array_merge(['a' => ['b' => 2, 'c' => [1, 2]]], ['a' => ['b' => null, 'c' => [3, 4]], 'b' => []]),
         );
     }
 
-    public function testMergeMultipleArrays()
+    public function testMergeMultipleArrays(): void
     {
         $this->assertSame(
             [1, 2, 3, 4],
-            array_merge([1], [2], [3], [4])
+            array_merge([1], [2], [3], [4]),
         );
     }
 
-    public function testMergeNotArrays()
+    public function testMergeNotArrays(): void
     {
         $this->assertSame(
             [1, 2],
-            array_merge(1, 2)
+            array_merge(1, 2),
         );
     }
 }

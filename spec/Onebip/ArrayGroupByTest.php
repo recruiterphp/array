@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Onebip;
 
 use PHPUnit\Framework\TestCase;
 
 class ArrayGroupByTest extends TestCase
 {
-    public function testArrayGroupBy()
+    public function testArrayGroupBy(): void
     {
         $this->assertSame([], array_group_by([]));
         $this->assertSame(
@@ -16,7 +18,7 @@ class ArrayGroupByTest extends TestCase
                 3 => [3, 3],
                 4 => [4],
             ],
-            array_group_by([1, 2, 2, 3, 3, 4])
+            array_group_by([1, 2, 2, 3, 3, 4]),
         );
         $this->assertSame(
             [
@@ -25,14 +27,12 @@ class ArrayGroupByTest extends TestCase
             ],
             array_group_by(
                 [1, 2, 3, 4, 5, 6],
-                function ($n) {
-                    return $n % 2;
-                }
-            )
+                fn ($n): int => $n % 2,
+            ),
         );
     }
 
-    public function testIterator()
+    public function testIterator(): void
     {
         $this->assertSame(
             [
@@ -41,7 +41,7 @@ class ArrayGroupByTest extends TestCase
                 3 => [3, 3],
                 4 => [4],
             ],
-            array_group_by(new \ArrayIterator([1, 2, 2, 3, 3, 4]))
+            array_group_by(new \ArrayIterator([1, 2, 2, 3, 3, 4])),
         );
     }
 }

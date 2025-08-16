@@ -1,19 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Onebip;
 
-class ArrayFlattenTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class ArrayFlattenTest extends TestCase
 {
-    public function testArrayFlatten()
+    public function testArrayFlatten(): void
     {
         $this->assertSame([], array_flatten([]));
         $this->assertSame(
             [1, 2, 3, 4, 5],
-            array_flatten([1, [2, [3, [4, [5]]]]])
+            array_flatten([1, [2, [3, [4, [5]]]]]),
         );
     }
 
-    public function testIterators()
+    public function testIterators(): void
     {
         $this->assertSame(
             [1, 2, 3, 4, 5],
@@ -22,7 +26,7 @@ class ArrayFlattenTest extends \PHPUnit\Framework\TestCase
                     new \ArrayIterator([2,
                         new \ArrayIterator([3,
                             new \ArrayIterator([4,
-                                new \ArrayIterator([5])])])])]))
+                                new \ArrayIterator([5])])])])])),
         );
     }
 }

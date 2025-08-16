@@ -1,31 +1,40 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Onebip;
 
-use Iterator;
-
-class Range implements Iterator
+class Range implements \Iterator
 {
-    private $from;
-    private $to;
     private $curr;
 
-    public function __construct($from, $to)
+    public function __construct(private $from, private $to)
     {
-        $this->from = $from;
-        $this->to = $to;
-
         $this->rewind();
     }
 
-    function rewind(): void
-    { $this->curr = $this->from; }
-    function current(): mixed
-    { return $this->curr; }
-    function key(): mixed
-    { return $this->curr; }
-    function next(): void
-    { $this->curr++; }
-    function valid(): bool
-    { return $this->curr < $this->to; }
+    public function rewind(): void
+    {
+        $this->curr = $this->from;
+    }
+
+    public function current(): mixed
+    {
+        return $this->curr;
+    }
+
+    public function key(): mixed
+    {
+        return $this->curr;
+    }
+
+    public function next(): void
+    {
+        ++$this->curr;
+    }
+
+    public function valid(): bool
+    {
+        return $this->curr < $this->to;
+    }
 }

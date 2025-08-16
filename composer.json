@@ -16,7 +16,10 @@
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.47",
-        "phpunit/phpunit": "^12.3"
+        "friendsofphp/php-cs-fixer": "^3.86",
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^12.3",
+        "rector/rector": "^2.1"
     },
     "replace": {
         "onebip/onebip-array": "self.version"

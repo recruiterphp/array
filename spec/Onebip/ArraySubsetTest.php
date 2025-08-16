@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Onebip;
 
-class ArraySubsetTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class ArraySubsetTest extends TestCase
 {
-    public function testArraySubset()
+    public function testArraySubset(): void
     {
         $this->assertTrue(array_subset([], []));
         $this->assertTrue(array_subset([], [1]));

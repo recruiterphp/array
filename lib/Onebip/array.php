@@ -1,8 +1,8 @@
 <?php
 
-namespace Onebip;
+declare(strict_types=1);
 
-use InvalidArgumentException;
+namespace Onebip;
 
 /*
  * Variant of PHP's array_reduce, but it supports any traversable in input
@@ -41,9 +41,9 @@ function array_concat(/* $element, ... */): array
             $concatenated[] = $argument;
         }
     }
+
     return $concatenated;
 }
-
 
 /*
  * Merges two array recursively, it behaves like `array_merge` from
@@ -74,7 +74,7 @@ function array_merge(/* $array, ... */): array
 {
     $merged = [];
     $arrays = array_reverse(func_get_args());
-    while (!empty($arrays)) {
+    while ([] !== $arrays) {
         $current = array_shift($arrays);
         if (!is_array($current)) {
             $current = [$current];
@@ -92,9 +92,9 @@ function array_merge(/* $array, ... */): array
             }
         }
     }
+
     return array_reverse($merged);
 }
-
 
 /*
  * Iterate over an array and apply a callback to each value.
@@ -108,7 +108,7 @@ function array_merge(/* $array, ... */): array
 function array_map($array, ?callable $mapper = null, $preserveKeys = false): array
 {
     $mapped = [];
-    $mapper = $mapper ?: function($value) { return $value; };
+    $mapper = $mapper ?: (fn ($value) => $value);
     if ($preserveKeys) {
         foreach ($array as $key => $value) {
             $mapped[$key] = call_user_func($mapper, $value, $key, $array);
@@ -118,10 +118,11 @@ function array_map($array, ?callable $mapper = null, $preserveKeys = false): arr
             $mapped[] = call_user_func($mapper, $value, $key, $array);
         }
     }
+
     return $mapped;
 }
 
-/*
+/**
  * Pluck a column from an array.
  *
  * Examples:
@@ -131,8 +132,10 @@ function array_map($array, ?callable $mapper = null, $preserveKeys = false): arr
  *                     ['foo' => 'bar', 'bis' => 'ter']],
  *                    'foo')
  *    );
+ *
+ * @return list<mixed>
  */
-function array_pluck($arrays, $column)
+function array_pluck($arrays, $column): array
 {
     $plucked = [];
     foreach ($arrays as $array) {
@@ -146,10 +149,11 @@ function array_pluck($arrays, $column)
         }
         $plucked[] = null;
     }
+
     return $plucked;
 }
 
-/*
+/**
  * Flattens nested arrays.
  *
  * Examples:
@@ -163,19 +167,20 @@ function array_flatten($array)
 {
     return array_reduce(
         $array,
-        function($acc, $item) {
-            if (is_array($item) || $item instanceof \Traversable) {
+        function ($acc, $item) {
+            if (is_iterable($item)) {
                 return array_merge($acc, array_flatten($item));
             } else {
                 $acc[] = $item;
+
                 return $acc;
             }
         },
-        []
+        [],
     );
 }
 
-/*
+/**
  * Returns whether every element of the array satisfies the given predicate or not.
  * Works with Iterators too.
  *
@@ -193,13 +198,14 @@ function array_flatten($array)
  *         })
  *     )
  */
-function array_all($array, callable $predicate)
+function array_all($array, callable $predicate): bool
 {
     foreach ($array as $key => $value) {
         if (!call_user_func($predicate, $value, $key, $array)) {
             return false;
         }
     }
+
     return true;
 }
 
@@ -214,17 +220,18 @@ function array_all($array, callable $predicate)
  *          })
  *      );
  */
-function array_some($array, callable $predicate)
+function array_some($array, callable $predicate): bool
 {
     foreach ($array as $key => $value) {
         if (call_user_func($predicate, $value, $key, $array)) {
             return true;
         }
     }
+
     return false;
 }
 
-/*
+/**
  * Returns the cartesian product of elements in the passed arrays.
  *
  * Examples:
@@ -233,10 +240,12 @@ function array_some($array, callable $predicate)
  *         [[1, 3], [1, 4], [2, 3], [2, 4]],
  *         array_cartesian_product([[1, 2], [3, 4]])
  *     );
+ *
+ * @return mixed[]
  */
-function array_cartesian_product(array $arrays)
+function array_cartesian_product(array $arrays): array
 {
-    if (empty($arrays)) {
+    if ([] === $arrays) {
         return [[]];
     }
 
@@ -254,7 +263,7 @@ function array_cartesian_product(array $arrays)
     return $product;
 }
 
-/*
+/**
  * Separates elements from an array into groups.
  * The function maps an element to the key that will be used for grouping.
  * If no function is passed, the element itself will be used as key.
@@ -286,18 +295,20 @@ function array_cartesian_product(array $arrays)
  */
 function array_group_by($array, ?callable $f = null)
 {
-    $f = $f ?: function($value) { return $value; };
+    $f = $f ?: (fn ($value) => $value);
+
     return array_reduce(
         $array,
-        function($buckets, $x) use ($f) {
+        function (array $buckets, $x) use ($f) {
             $key = call_user_func($f, $x);
             if (!array_key_exists($key, $buckets)) {
                 $buckets[$key] = [];
             }
             $buckets[$key][] = $x;
+
             return $buckets;
         },
-        []
+        [],
     );
 }
 
@@ -328,7 +339,7 @@ function array_group_by($array, ?callable $f = null)
  * Beware: this method uses references, only modify it
  * if you know what you're doing.
  */
-function array_as_hierarchy(array $array, $separator = '.')
+function array_as_hierarchy(array $array, $separator = '.'): array
 {
     $hierarchy = [];
     foreach ($array as $key => $value) {
@@ -343,11 +354,12 @@ function array_as_hierarchy(array $array, $separator = '.')
         }
         $branch[$valueSegment] = $value;
     }
+
     return $hierarchy;
 }
 
 /**
- * Tells if it's a numeric array or not
+ * Tells if it's a numeric array or not.
  *
  * Examples:
  *       $this->assertTrue(is_numeric_array([1,2,3]));
@@ -357,11 +369,12 @@ function array_as_hierarchy(array $array, $separator = '.')
  */
 function is_numeric_array(array $array): bool
 {
-    foreach ($array as $key => $_) {
-        if (!is_integer($key)) {
+    foreach (array_keys($array) as $key) {
+        if (!is_int($key)) {
             return false;
         }
     }
+
     return true;
 }
 
@@ -373,7 +386,8 @@ function is_numeric_array(array $array): bool
  *      array_fetch([], 0, 'bar') -> 'bar'
  *      array_fetch([], 0, function($i) { return $i + 10; }) -> 10
  */
-function array_fetch($array, $key /* plus optional $fallback */) {
+function array_fetch(array $array, $key /* plus optional $fallback */)
+{
     $presence = array_key_exists($key, $array);
 
     if ($presence) {
@@ -381,7 +395,7 @@ function array_fetch($array, $key /* plus optional $fallback */) {
     }
 
     if (func_num_args() < 3) {
-        throw new InvalidArgumentException("key not found $key");
+        throw new \InvalidArgumentException("key not found $key");
     }
 
     $fallback = func_get_arg(2);
@@ -438,7 +452,7 @@ function array_max($array)
                 return $max;
             }
         },
-        $max
+        $max,
     );
 }
 
@@ -449,7 +463,7 @@ function array_max($array)
  */
 function array_get_in($array, array $path, $default = null)
 {
-    if (empty($path)) {
+    if ([] === $path) {
         return $array;
     }
 
@@ -465,10 +479,8 @@ function array_get_in($array, array $path, $default = null)
 /**
  * Is array1 a subset of array2?
  */
-function array_subset(array $array1, array $array2)
+function array_subset(array $array1, array $array2): bool
 {
-    return (count($array1) <= count($array2)) &&
-        array_all($array1, function ($elem) use ($array2) {
-            return in_array($elem, $array2);
-        });
+    return (count($array1) <= count($array2))
+        && array_all($array1, fn ($elem): bool => in_array($elem, $array2));
 }

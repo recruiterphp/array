@@ -1,31 +1,35 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Onebip;
 
-class ArrayConcatTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class ArrayConcatTest extends TestCase
 {
-    public function testConcat()
+    public function testConcat(): void
     {
         $this->assertSame(
             [1, 2, 3, 4],
-            array_concat(1, [2, 3], [4])
+            array_concat(1, [2, 3], [4]),
         );
     }
 
-    public function testConcatPresevesNestedArrays()
+    public function testConcatPresevesNestedArrays(): void
     {
         $this->assertSame(
             [1, 2, [3], 4],
-            array_concat(1, [2, [3]], [4])
+            array_concat(1, [2, [3]], [4]),
         );
     }
 
-    public function testConcatEmpty()
+    public function testConcatEmpty(): void
     {
         $this->assertSame([], array_concat([], [], []));
     }
 
-    public function testConcatCastToArray()
+    public function testConcatCastToArray(): void
     {
         $this->assertSame([1], array_concat([1]));
         $this->assertSame([1], array_concat(1));

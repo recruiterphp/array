@@ -1,17 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Onebip;
 
 use PHPUnit\Framework\TestCase;
 
 class ArrayAsHierarchyTest extends TestCase
 {
-    public function testDottedNotationToHierarchical()
+    public function testDottedNotationToHierarchical(): void
     {
         $this->assertSame([], array_as_hierarchy([]));
         $this->assertSame(
             ['key' => 'value'],
-            array_as_hierarchy(['key' => 'value'])
+            array_as_hierarchy(['key' => 'value']),
         );
         $this->assertSame(
             [
@@ -29,7 +31,7 @@ class ArrayAsHierarchyTest extends TestCase
                 'key.sub2' => 'value2',
                 'key.sub3.sub4' => 'value3',
                 'answer' => 42,
-            ])
+            ]),
         );
     }
 }
