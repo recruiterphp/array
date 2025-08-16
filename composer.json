@@ -1,24 +1,38 @@
 {
-    "name": "onebip/onebip-array",
+    "name": "recruiterphp/array",
     "license": "MIT",
     "authors": [
         {
             "name": "Giorgio Sironi",
-            "email": "giorgio.sironi@onebip.com"
+            "email": "work@giorgiosironi.com"
+        },
+        {
+            "name": "Contributors",
+            "homepage": "https://github.com/recruiterphp/onebip-array/graphs/contributors"
         }
     ],
     "require": {
-        "php": ">=5.6.0"
+        "php": "^8.4"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.0"
+        "ergebnis/composer-normalize": "^2.47",
+        "phpunit/phpunit": "^12.3"
+    },
+    "replace": {
+        "onebip/onebip-array": "self.version"
     },
     "autoload": {
-      "psr-0": {
-        "Onebip": "lib/"
-      },
-      "files": [
-        "lib/Onebip/array.php"
-      ]
+        "psr-0": {
+            "Onebip": "lib/"
+        },
+        "files": [
+            "lib/Onebip/array.php"
+        ]
+    },
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true
+        },
+        "sort-packages": true
     }
 }
