@@ -243,6 +243,7 @@ function array_some(iterable $array, callable $predicate): bool
  *     );
  *
  * @param array<iterable> $arrays
+ *
  * @return mixed[]
  */
 function array_cartesian_product(array $arrays): array

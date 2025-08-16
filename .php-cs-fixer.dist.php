@@ -21,8 +21,8 @@ return new PhpCsFixer\Config()
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()
-            ->in(__DIR__ . '/lib')
-            ->in(__DIR__ . '/spec')
+            ->in(__DIR__ . '/src')
+            ->in(__DIR__ . '/tests')
             ->append([
                 __FILE__,
                 __DIR__ . '/rector.php',
