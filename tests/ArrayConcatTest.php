@@ -16,7 +16,7 @@ class ArrayConcatTest extends TestCase
         );
     }
 
-    public function testConcatPresevesNestedArrays(): void
+    public function testConcatPreservesNestedArrays(): void
     {
         $this->assertSame(
             [1, 2, [3], 4],
